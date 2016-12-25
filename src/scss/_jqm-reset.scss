@@ -1,0 +1,44 @@
+.ui-panel-inner {
+	padding: 0 !important;
+}
+
+.ui-listview {
+	margin: 0 !important;
+	& > li > a.ui-btn {
+		border: 0 !important;
+	}
+}
+
+.ui-flipswitch.ui-corner-all {
+	margin: 0 !important;
+	border-radius: 20px !important;
+}
+
+.ui-page {
+	max-width: 768px;
+	.ui-content {
+		position: relative;
+	}
+}
+
+.ui-listview > .ui-li-has-thumb > .ui-btn, .ui-listview > .ui-li-static.ui-li-has-thumb {
+    min-height: 0 !important;
+    padding-left: 15px !important;
+}
+
+.ui-popup-screen {
+	&.in {
+	    opacity: 0.8 !important;
+	    filter: Alpha(Opacity=80) !important;
+	}
+}
+
+.ui-li-static {
+	&.ui-body-inherit {
+		color: white !important;
+		text-align: center !important;
+		border: none !important;
+		border-radius: 0 !important;
+		background-color: transparent !important;
+	}
+}

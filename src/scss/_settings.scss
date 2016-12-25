@@ -1,0 +1,87 @@
+#settings {
+	background-color: #f7f7f7 !important;
+	
+	.ui-header {
+		border-color: #DDD !important;
+		background-color: #FFF !important;
+		.btn-navbar {
+			color: blue !important;
+			&:before {
+				color: $grey;
+			}
+		}
+	}
+	
+	h1 {
+		display: none;
+	}
+	
+	h5 {
+		text-align: left;
+	}
+	
+	.ui-content {
+		padding: 0;
+
+		h3 {
+		    padding-left: 14px;
+		}
+
+		.settings-option {
+			margin-bottom: 30px;
+			h5 {
+			    padding-left: 14px;
+			}
+			
+			& > .small {
+				padding-top: 10px;
+				padding-left: 14px;
+			}
+			
+			.option {
+				display: inline-block;
+				width: 100%;
+				margin-bottom: 3px;
+				padding: 5px 15px;
+				border-top: 1px solid #DDD;
+				border-bottom: 1px solid #DDD;
+				background-color: white;
+				
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				
+				label {
+					display: inline-block;
+					padding-top: 10px;
+					float: left;
+				}
+				.ui-flipswitch {
+					float: right;
+					margin: 0;
+					.ui-flipswitch-on {
+						border-radius: 50% !important;
+						border-color: #EEE !important;
+						background-color: white !important;
+					}
+				}
+				ul {
+					list-style-type: none;
+					margin: 0;
+					padding: 0;
+				}
+			}
+			
+			&.user-account-details {
+				#email {
+					display: inline-block;
+					color: blue;
+					padding-top: 10px;
+					padding-bottom: 10px;
+					float: left;
+				}
+			}
+			
+		}
+	}
+}

@@ -1,0 +1,17 @@
+.ui-btn {
+	color: white !important;
+	border-radius: 4px !important;
+	border: 1px solid #444 !important;
+	background-color: transparent !important;
+}
+
+.ui-btn-icon-left:after,
+.ui-btn-icon-right:after,
+.ui-btn-icon-top:after,
+.ui-btn-icon-bottom:after,
+.ui-btn-icon-notext:after {
+	@include icons();
+	content: "q" !important;
+	background-image: none !important;
+	background-color: transparent !important;
+}

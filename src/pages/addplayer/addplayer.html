@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+  <form (ngSubmit)="addPlayer()">
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">Player name</ion-label>
+      <ion-input placeholder="Text Input" name="name" [(ngModel)]="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">Shirt number</ion-label>
+      <ion-input type="number" placeholder="Number Input with no label" name="number" [(ngModel)]="number"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+    <button ion-button type="submit" block>Add</button>
+  </form>
+
+
+</ion-content>

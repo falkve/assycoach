@@ -6,6 +6,17 @@ import { PlayerPage } from '../pages/player/player';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import {AddPlayerPage} from "../pages/addplayer/addplayer";
+import {StorageService} from "../assets/scripts/storageservice";
+import {BrowserModule} from "@angular/platform-browser";
+import {AngularFireModule} from "angularfire2";
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyAZXxk_yvqzmzvljKQTa7zFtCE5pRVZuKQ",
+  authDomain: "coachassistant-500d7.firebaseapp.com",
+  databaseURL: "https://coachassistant-500d7.firebaseio.com",
+  storageBucket: "coachassistant-500d7.appspot.com",
+  messagingSenderId: "452645135599"
+};
 
 @NgModule({
   declarations: [
@@ -17,7 +28,9 @@ import {AddPlayerPage} from "../pages/addplayer/addplayer";
     AddPlayerPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    BrowserModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -28,6 +41,9 @@ import {AddPlayerPage} from "../pages/addplayer/addplayer";
     TabsPage,
     AddPlayerPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, StorageService]
 })
 export class AppModule {}
+
+
+

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Add Player</ion-title>
+    <ion-title>Add Position</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,18 +11,18 @@
 
   <ion-list>
     <ion-item>
-      <ion-label color="primary" stacked>Player name</ion-label>
+      <ion-label color="primary" stacked>Position</ion-label>
       <ion-input placeholder="" name="name" [(ngModel)]="name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>Shirt number</ion-label>
-      <ion-input type="number" placeholder="" name="number" [(ngModel)]="number"></ion-input>
+      <ion-label color="primary" stacked>Short version</ion-label>
+      <ion-input placeholder="" name="shorty" [(ngModel)]="shorty"></ion-input>
     </ion-item>
 
   </ion-list>
   <ion-buttons>
-    <button ion-button round (click)="addPlayer()">Add</button>
+    <button ion-button round (click)="addGamePosition()">Add</button>
     <button ion-button round (click)="close()">Close</button>
   </ion-buttons>
   </form>

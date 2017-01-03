@@ -3,25 +3,24 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Team</ion-title>
+    <ion-title>Games</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let player of players | async">
+    <ion-item-sliding *ngFor="let game of games | async">
       <ion-item>
         <ion-avatar item-left>
-          <img src="assets/icon/apple-icon.png">
+          <img src="assets/images/game.png">
         </ion-avatar>
-        <h2>{{player.name}}</h2>
+        <h2>{{game.name}}</h2>
       </ion-item>
 
       <ion-item-options icon-left side="right">
-        <button ion-button color="danger" (click)="deletePlayer(player)">
+        <button ion-button color="danger" (click)="deleteGame(game)">
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>
@@ -32,10 +31,11 @@
 
 
 <ion-fab bottom right>
-  <button (click)="addPlayer()" ion-fab><ion-icon name="add"></ion-icon></button>
+  <button (click)="addGame()" ion-fab><ion-icon name="add"></ion-icon></button>
   <!--<button ion-fab><ion-icon name="menu"></ion-icon></button>
   <ion-fab-list side="top">
     <button ion-fab (click)="addPlayer()"><ion-icon name="add"></ion-icon></button>
   </ion-fab-list>-->
 </ion-fab>
+
 

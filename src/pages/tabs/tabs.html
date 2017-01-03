@@ -1,6 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>CoachAssistant</ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-tabs>
-  <ion-tab [root]="tab3Root" tabTitle="Player" tabIcon="contacts"></ion-tab>
-  <ion-tab [root]="tab1Root" tabTitle="Change player" tabIcon="swap"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Settings" tabIcon="settings"></ion-tab>
+  <ion-tab [root]="playersRoot" tabTitle="Choose your team" tabIcon="swap"></ion-tab>
+  <ion-tab [root]="playerRoot" tabTitle="Add player" tabIcon="person-add"></ion-tab>
+
 
 </ion-tabs>

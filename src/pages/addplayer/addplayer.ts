@@ -1,28 +1,32 @@
 import { Component } from '@angular/core';
-import {StorageService} from "../../assets/scripts/storageservice";
-
+import {NavController, ViewController} from "ionic-angular";
+import {Player} from "../../../www/assets/scripts/playertypes";
+import {StorageService} from "../../../www/assets/scripts/storageservice";
 
 
 @Component({
-  selector: 'page-player',
+  selector: 'page-addplayer',
   templateUrl: 'addplayer.html'
 })
 export class AddPlayerPage {
   name:string;
   number:number;
 
-  constructor(private storageService: StorageService) {
+  players;
 
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, storageService : StorageService) {
+    this.players = storageService.players;
   }
 
-  /*constructor(params: NavParams) {
-    console.log('UserId', params.get('userId'));
-  }*/
 
   addPlayer(){
+    let player = new Player(this.name, this.number);
+    this.players.push(player);
+    this.close();
+  }
 
-//    storageService.storePlayers()
-    console.log(this.name);
+  close(){
+    this.viewCtrl.dismiss();
   }
 }
 

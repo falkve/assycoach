@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>CoachAssistant</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-img width="282" height="200" src="assets/images/football.png"></ion-img>
+  <div *ngIf="(hasPlayers)">You don't have any players. Start adding them.{{players.length}}</div>
+  {{players.length}}
+</ion-content>
+
+
+
+

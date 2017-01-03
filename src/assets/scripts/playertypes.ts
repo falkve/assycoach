@@ -1,4 +1,3 @@
-import {StorageService} from "./storageservice";
 /**
  * Created by vonfalk on 2016-12-25.
  */
@@ -41,5 +40,6 @@ export class Players{
   getPlayer(index : number){
     return this.players[index];
   }
-
 }
+
+

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController} from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { AddPlayerPage } from "../addplayer/addplayer";
+import {StorageService} from "../../../www/assets/scripts/storageservice";
 
 @Component({
   selector: 'page-player',
@@ -9,20 +10,20 @@ import { AddPlayerPage } from "../addplayer/addplayer";
 })
 export class PlayerPage {
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  players;
 
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public storageService : StorageService) {
+    this.players = storageService.players;
   }
 
-
-
-  openAddPlayer(){
-    console.log("button pressed");
-    let profileModal = this.modalCtrl.create(AddPlayerPage, { userId: 8675309 });
+  addPlayer(){
+    let profileModal = this.modalCtrl.create(AddPlayerPage);
     profileModal.present();
   }
+
+  deletePlayer(player){
+    this.players.remove(player);
+  }
 }
-
-
-
 
 

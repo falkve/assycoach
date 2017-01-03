@@ -1,14 +1,20 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
+import { CoachAssistantApp } from './app.component';
 import { PlayerPage } from '../pages/player/player';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import {AddPlayerPage} from "../pages/addplayer/addplayer";
-import {StorageService} from "../assets/scripts/storageservice";
 import {BrowserModule} from "@angular/platform-browser";
 import {AngularFireModule} from "angularfire2";
+import {LoginPage} from "../pages/login/login";
+import {PlayersPage} from "../pages/players/players";
+import {StartPage} from "../pages/start/start";
+import {StorageService} from "../../www/assets/scripts/storageservice";
+import {GamePositionPage} from "../pages/gameposition/gameposition";
+import {GamePage} from "../pages/game/game";
+import {GamesPage} from "../pages/games/games";
+import {GamePositionsPage} from "../pages/gamepositions/gamepositions";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAZXxk_yvqzmzvljKQTa7zFtCE5pRVZuKQ",
@@ -20,28 +26,40 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    AboutPage,
+    CoachAssistantApp,
+    GamePositionsPage,
+    GamePositionPage,
     PlayerPage,
     HomePage,
     TabsPage,
-    AddPlayerPage
+    AddPlayerPage,
+    LoginPage,
+    PlayersPage,
+    StartPage,
+    GamePage,
+    GamesPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(CoachAssistantApp),
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    AboutPage,
+    CoachAssistantApp,
+    GamePositionsPage,
+    GamePositionPage,
     PlayerPage,
     HomePage,
     TabsPage,
-    AddPlayerPage
+    AddPlayerPage,
+    LoginPage,
+    PlayersPage,
+    StartPage,
+    GamePage,
+    GamesPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, StorageService]
+  providers: [StorageService,{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}
 

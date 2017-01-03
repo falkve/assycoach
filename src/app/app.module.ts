@@ -15,6 +15,8 @@ import {GamePositionPage} from "../pages/gameposition/gameposition";
 import {GamePage} from "../pages/game/game";
 import {GamesPage} from "../pages/games/games";
 import {GamePositionsPage} from "../pages/gamepositions/gamepositions";
+import {TeamPage} from "../pages/team/team";
+import {TeamsPage} from "../pages/teams/teams";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAZXxk_yvqzmzvljKQTa7zFtCE5pRVZuKQ",
@@ -37,7 +39,9 @@ export const firebaseConfig = {
     PlayersPage,
     StartPage,
     GamePage,
-    GamesPage
+    GamesPage,
+    TeamPage,
+    TeamsPage
   ],
   imports: [
     IonicModule.forRoot(CoachAssistantApp),
@@ -57,7 +61,9 @@ export const firebaseConfig = {
     PlayersPage,
     StartPage,
     GamePage,
-    GamesPage
+    GamesPage,
+    TeamPage,
+    TeamsPage
   ],
   providers: [StorageService,{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

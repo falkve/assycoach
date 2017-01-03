@@ -3,6 +3,8 @@ import { ModalController} from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { AddPlayerPage } from "../addplayer/addplayer";
 import {StorageService} from "../../../www/assets/scripts/storageservice";
+import {Team} from "../../../www/assets/scripts/gametypes";
+
 
 @Component({
   selector: 'page-player',
@@ -11,9 +13,10 @@ import {StorageService} from "../../../www/assets/scripts/storageservice";
 export class PlayerPage {
 
   players;
-
+  team : Team;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public storageService : StorageService) {
     this.players = storageService.players;
+    this.team = storageService.currentTeam;
   }
 
   addPlayer(){

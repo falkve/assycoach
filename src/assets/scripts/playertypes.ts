@@ -11,35 +11,15 @@ export class Player {
     this.number = number;
   }
 
-  public  fromJson(userJson: any): Player {
+  /*public  fromJson(userJson: any): Player {
     var player = new Player(userJson.name, userJson.number);
     return player;
   }
 
   public toJson(){
     return JSON.stringify(this);
-  }
+  }*/
 }
 
-export class Players{
-
-  players = new Array<Player>();
-
-  addPlayer(player :Player){
-    this.players.push(player);
-  }
-
-  toJson(){
-    return JSON.stringify(this.players);
-  }
-
-  fromJson(playerString : string){
-    this.players = JSON.parse(playerString);
-  }
-
-  getPlayer(index : number){
-    return this.players[index];
-  }
-}
 
 

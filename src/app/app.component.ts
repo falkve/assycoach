@@ -3,9 +3,9 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import {LoginPage} from "../pages/login/login";
 import {PlayerPage} from "../pages/player/player";
-import {StartPage} from "../pages/start/start";
 import {GamePositionsPage} from "../pages/gamepositions/gamepositions";
 import {GamesPage} from "../pages/games/games";
+import {TeamsPage} from "../pages/teams/teams";
 
 
 @Component({
@@ -15,7 +15,7 @@ export class CoachAssistantApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage: any = StartPage;
+  rootPage: any = TeamsPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -27,9 +27,10 @@ export class CoachAssistantApp {
     // set our app's pages
     this.pages = [
       { title: 'Login', component: LoginPage },
-      { title: 'Team', component: PlayerPage },
+      { title: 'Players', component: PlayerPage },
       { title: 'Positions', component: GamePositionsPage },
-      { title: 'Active games', component: GamesPage },
+      { title: 'Match', component: GamesPage },
+      { title: 'Switch Team', component: TeamsPage }
      // { title: 'History', component: TabsPage }
       //{ title: 'My First List', component: ListPage }
     ];

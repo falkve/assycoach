@@ -1,0 +1,36 @@
+/*page-addplayer {
+  .modal-wrapper{
+    position:absolute !important;
+    width:90vw !important;
+    height:260px !important;
+    top:0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: auto !important;
+  }
+
+  .modal .backdrop{
+    display:block !important;
+  }
+}*/
+
+
+.modal-wrapper{
+  position:absolute !important;
+  width:300px !important;
+  height:260px !important;
+  top:0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: auto !important;
+}
+
+.modal .backdrop{
+  display:block !important;
+}
+
+.scroll-bar-indicator {
+  display: none;
+}

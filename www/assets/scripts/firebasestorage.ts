@@ -1,11 +1,11 @@
 import * as firebase from "firebase";
+import {Player} from "../../../www/assets/scripts/playertypes";
+import {Observable} from "rxjs";
+
 export class FirebaseStorage {
 
   constructor() {
-
-  }
-
-  init(){
+    console.log("Initializing Firebase...");
     var config = {
       apiKey: "AIzaSyAZXxk_yvqzmzvljKQTa7zFtCE5pRVZuKQ",
       authDomain: "coachassistant-500d7.firebaseapp.com",
@@ -24,48 +24,26 @@ export class FirebaseStorage {
 
     console.log(defaultApp.name);
 
-
-
-    /*let firebaseStorage = new FirebaseStorage();
-    firebaseStorage.init();*/
-
-
-    //var defaultDatabase = firebase.database();
   }
+
 
 
 
   storePlayers(object : string){
-    var storage = firebase.storage();
-    var storageRef = storage.ref();
-    var playersRef = storageRef.child('players');
 
-    playersRef.putString(object).then(function (done){
-      console.log('Uploaded players!');
-    });
   }
 
 
   public loadPlayers(){
-    var storage = firebase.storage();
-    var storageRef = storage.ref();
-
-    storageRef.child('players').getDownloadURL().then(function(url) {
-
-
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'text';
-    xhr.onload = function(event) {
-      //var jsonData = xhr.responseText;
-    };
-    xhr.open('GET', url);
-    xhr.send();
-
-      return url;
-    }).catch(function(error) {
-      // Handle any errors
+    let players = [];
+    firebase.database().ref('/players').once('value').then(function(snapshot){
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+          let player = new Player(childData.name, parseInt(childData.number));
+          players.push(player);
+      });
     });
-    return "";
+    return Observable.create(observer => {observer.next(players); observer.complete();});
   }
 
 
@@ -74,14 +52,6 @@ export class FirebaseStorage {
   }
 
   storePositions(ref: string, object : string){
-    var storage = firebase.storage();
-    var storageRef = storage.ref();
-    var positionsRef = storageRef.child('positions');
-    var positionRef = positionsRef.child(ref);
-
-    positionRef.putString(object).then(function (done){
-      console.log('Uploaded positions!');
-    });
 
   }
 

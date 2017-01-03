@@ -8,3 +8,5 @@ plugins/
 .editorconfig
 .idea
 assycoach.iml
+.tmp/
+www/

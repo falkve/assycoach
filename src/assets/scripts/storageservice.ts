@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {FirebaseListObservable, AngularFire} from "angularfire2";
 import {Player} from "./playertypes";
-import {Game, GamePosition} from "./gametypes";
+import {Game, GamePosition, Team} from "./gametypes";
 
 
 /**
@@ -11,22 +11,29 @@ import {Game, GamePosition} from "./gametypes";
 @Injectable()
 export class StorageService {
 
+  af: AngularFire;
+
   players : FirebaseListObservable<Player[]>;
   games : FirebaseListObservable<Game[]>;
   gamePositions : FirebaseListObservable<GamePosition[]>;
+  teams : FirebaseListObservable<Team[]>;
 
+  currentTeam : Team;
 
+  initiate(team : Team){
+    this.currentTeam = team;
 
-  constructor(af: AngularFire){
-    this.players = af.database.list('/players');
-    this.games = af.database.list('/games');
-    this.gamePositions = af.database.list('/positions');
+    let teamId = team.id;
+    this.players = this.af.database.list('/' + teamId + '/players');
+    this.games = this.af.database.list('/' + teamId + '/games');
+    this.gamePositions = this.af.database.list('/' + teamId + '/positions');
+
   }
-}
 
-  /*constructor() {
-    console.log("Initializing Firebase...");
-    var config = {
+  constructor(af: AngularFire) {
+    this.af = af;
+    this.teams = this.af.database.list('/teams');
+    /*var config = {
       apiKey: "AIzaSyAZXxk_yvqzmzvljKQTa7zFtCE5pRVZuKQ",
       authDomain: "coachassistant-500d7.firebaseapp.com",
       databaseURL: "https://coachassistant-500d7.firebaseio.com",
@@ -40,8 +47,23 @@ export class StorageService {
       console.log(errorMessage);
     });
 
-    console.log(defaultApp.name);
-  }*/
+    console.log(defaultApp.name);*/
+  }
+
+  public loadTeams(callbackFunc){
+    firebase.database().ref('/teams').once('value', callbackFunc, this);
+  }
+
+  public loadPositions(teamId, callbackFunc){
+    firebase.database().ref('/'+teamId+'/positions').once('value', callbackFunc, this);
+  }
+
+  public loadPlayers(teamId, callbackFunc){
+    firebase.database().ref('/'+teamId+'/players').once('value', callbackFunc, this);
+  }
+}
+
+
 
 
 

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ModalController} from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import {GamePage} from "../game/game";
+import {StorageService} from "../../../www/assets/scripts/storageservice";
+import {Team} from "../../../www/assets/scripts/gametypes";
 
 
 @Component({
@@ -11,8 +13,10 @@ import {GamePage} from "../game/game";
 export class GamesPage {
 
   games;
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
-
+  team : Team;
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public storageService : StorageService) {
+    this.games = storageService.games;
+    this.team = storageService.currentTeam;
   }
 
   addGame(){

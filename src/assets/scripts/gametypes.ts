@@ -1,3 +1,5 @@
+import {FirebaseListObservable} from "angularfire2";
+import {Player} from "./playertypes";
 /**
  * Created by vonfalk on 2017-01-01.
  */
@@ -8,33 +10,30 @@ export class Game{
   constructor(name: string) {
     this.name = name;
   }
-
-  public  fromJson(gameJson: any): Game {
-    var player = new Game(gameJson.name);
-    return player;
-  }
-
-  public toJson(){
-    return JSON.stringify(this);
-  }
 }
 
 export class GamePosition{
-
   public name: string;
   public shorty : string
   constructor(name: string, shorty : string) {
     this.name = name;
     this.shorty = shorty;
   }
+}
 
-  public  fromJson(gameJson: any): GamePosition {
-    var gamePosition = new GamePosition(gameJson.name, gameJson.shorty);
-    return gamePosition;
-  }
+export class Team{
+  id : string;
+  name : String;
+  players : FirebaseListObservable<Player[]>;
 
-  public toJson(){
-    return JSON.stringify(this);
+  constructor(name: string) {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for(var i = 0; i < 36; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      this.id = text;
+      this.name = name;
   }
 }
 

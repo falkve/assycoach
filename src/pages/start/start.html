@@ -3,14 +3,17 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>CoachAssistant</ion-title>
+    <ion-title>{{team.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-img width="282" height="200" src="assets/images/football.png"></ion-img>
-  <div *ngIf="(hasPlayers)">You don't have any players. Start adding them.{{players.length}}</div>
-  {{players.length}}
+
+  <ion-buttons>
+    <button *ngIf="!hasPositions" ion-button round (click)="addPositions()">Add positions</button>
+    <button *ngIf="!hasPlayers" ion-button round (click)="addPlayers()">Add players</button>
+  </ion-buttons>
 </ion-content>
 
 

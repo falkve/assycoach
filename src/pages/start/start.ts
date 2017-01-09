@@ -12,28 +12,21 @@ import {PlayerPage} from "../player/player";
 export class StartPage {
 
   team : Team;
-  hasPositions : boolean;
-  hasPlayers : boolean;
+  noPositions : boolean;
+  noPlayers : boolean;
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public storageService : StorageService ) {
-    this.team = storageService.currentTeam;
+    this.team = storageService.getCurrentTeam();
 
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
 
-    loading.present();
     this.storageService.loadPlayers(this.team.id, (snapshot)=>{
-      console.log(snapshot.exists());
-      this.hasPlayers = snapshot.exists();
-      loading.dismiss();
+      this.noPlayers = !snapshot.exists();
     });
 
-    loading.present();
+
     this.storageService.loadPositions(this.team.id, (snapshot)=>{
-      console.log(snapshot.exists());
-      this.hasPositions = snapshot.exists();
-      loading.dismiss();
+      this.noPositions = !snapshot.exists();
+
     });
   }
 

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {NavController, ModalController} from 'ionic-angular';
+import {NavController, ModalController, AlertController} from 'ionic-angular';
 import {StorageService} from "../../../www/assets/scripts/storageservice";
 import {GamePositionPage} from "../gameposition/gameposition";
 import {Team} from "../../../www/assets/scripts/gametypes";
+import 'rxjs/add/operator/map';
 
 
 
@@ -15,9 +16,9 @@ export class GamePositionsPage {
   gamePositions;
   team : Team;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public storageService : StorageService) {
-    this.gamePositions = storageService.gamePositions;
-    this.team = storageService.currentTeam;
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private alertCtrl: AlertController, public storageService : StorageService) {
+    this.gamePositions = storageService.getGamePositions();
+    this.team = storageService.getCurrentTeam();
   }
 
   addPosition(){
@@ -27,6 +28,7 @@ export class GamePositionsPage {
 
   deletePosition(gamePosition){
     this.gamePositions.remove(gamePosition);
+    this.navCtrl.pop();
+    this.navCtrl.push(GamePositionsPage);
   }
-
 }

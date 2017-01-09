@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 import {NavController, ViewController} from "ionic-angular";
 import {StorageService} from "../../../www/assets/scripts/storageservice";
 import {GamePosition} from "../../../www/assets/scripts/gametypes";
@@ -15,8 +15,12 @@ export class GamePositionPage {
 
   gamePositions;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, storageService : StorageService) {
-    this.gamePositions = storageService.gamePositions;
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, private ele: ElementRef, public storageService : StorageService) {
+    this.gamePositions = storageService.getGamePositions();
+  }
+
+  ngAfterViewInit() {
+    this.ele.nativeElement.parentElement.setAttribute("class","OVERRIDE_gameposition "+ this.ele.nativeElement.parentElement.getAttribute("class"));
   }
 
   createShortVersion(){
@@ -25,7 +29,7 @@ export class GamePositionPage {
 
   addGamePosition(){
     let gamePosition = new GamePosition(this.name, this.shorty);
-    this.gamePositions.push(gamePosition);
+    this.storageService.addGamePosition(gamePosition);
     this.close();
   }
 

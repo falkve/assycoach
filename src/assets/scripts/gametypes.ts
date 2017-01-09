@@ -4,17 +4,21 @@ import {Player} from "./playertypes";
  * Created by vonfalk on 2017-01-01.
  */
 export class Game{
+  public id : string;
+  public opponent: string;
+  public startTime : string = '';
+  public endTime : string = '';
+  public isTeamComplete;
 
-  public name: string;
-
-  constructor(name: string) {
-    this.name = name;
+  constructor(opponent: string) {
+    this.opponent = opponent;
   }
 }
 
 export class GamePosition{
   public name: string;
   public shorty : string
+  public id : string;
   constructor(name: string, shorty : string) {
     this.name = name;
     this.shorty = shorty;
@@ -22,19 +26,27 @@ export class GamePosition{
 }
 
 export class Team{
-  id : string;
-  name : String;
-  players : FirebaseListObservable<Player[]>;
+  public id : string;
+  public name : String;
+  public players : FirebaseListObservable<Player[]>;
 
   constructor(name: string) {
-      var text = "";
-      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for(var i = 0; i < 36; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-      }
-      this.id = text;
       this.name = name;
   }
+}
+
+export class GamePlayer{
+  public player : Player;
+  public position : Position;
+  public startTime : Date;
+  public endTime : Date;
+  public id : string;
+
+  constructor(player: Player, position: Position) {
+    this.player = player;
+    this.position = position;
+  }
+
 }
 
 

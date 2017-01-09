@@ -3,8 +3,10 @@
  */
 export class Player {
 
+  public id : string;
   public name: string;
   public number: number;
+
 
   constructor(name: string, number: number) {
     this.name = name;

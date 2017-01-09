@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { ModalController} from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { AddPlayerPage } from "../addplayer/addplayer";
@@ -15,8 +15,8 @@ export class PlayerPage {
   players;
   team : Team;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public storageService : StorageService) {
-    this.players = storageService.players;
-    this.team = storageService.currentTeam;
+    this.players = storageService.getPlayers();
+    this.team = storageService.getCurrentTeam();
   }
 
   addPlayer(){

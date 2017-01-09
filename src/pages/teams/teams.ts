@@ -13,7 +13,7 @@ export class TeamsPage {
   teams;
 
   constructor(public navCtrl: NavController, public storageService : StorageService, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
-    this.teams = storageService.teams;
+    this.teams = storageService.getTeams();
 
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
@@ -22,12 +22,8 @@ export class TeamsPage {
     loading.present();
 
     this.storageService.loadTeams((snapshot)=>{
-      console.log(snapshot.exists());
 
       if(snapshot.exists()){
-        snapshot.forEach((childSnapshot)=> {
-          //var childData = childSnapshot.val();
-        });
       } else {
         this.openAddTeam();
       }

@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
-import {PlayersPage} from "../players/players";
-import {PlayerPage} from "../player/player";
+import {ChoosePlayersPage} from "../chooseplayer/chooseplayer";
+import {ActiveGamePage} from "../activegame/activegame";
+import {ActiveGameStatPage} from "../activegamestat/activegamestat";
+import {Game, Team} from "../../../www/assets/scripts/gametypes";
+import {StorageService} from "../../../www/assets/scripts/storageservice";
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
-  playersRoot: any = PlayersPage;
-  playerRoot: any = PlayerPage;
-//  positionsRoot: any = PositionsPage;
 
-  constructor() {
+  game : Game;
+  team : Team;
 
+  playerRoot: any = ChoosePlayersPage;
+  activeGameRoot: any = ActiveGamePage;
+  activeGameStatRoot: any = ActiveGameStatPage;
+
+  constructor(storageService : StorageService) {
+    this.team = storageService.getCurrentTeam();
+    this.game = storageService.getCurrentGame();
   }
+
 }

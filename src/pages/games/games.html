@@ -12,12 +12,13 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let game of games | async">
-      <ion-item>
-        <ion-avatar item-left>
+      <button ion-item (click)="goToGame(game)" [ngSwitch]="game.startTime">
+        <ion-avatar item-left >
           <img src="assets/images/game.png">
         </ion-avatar>
-        <h2>{{game.name}}</h2>
-      </ion-item>
+        <h2 *ngSwitchCase="''">{{game.opponent}}</h2>
+        <h2 *ngSwitchDefault>{{game.opponent}} - {{game.startTime}}</h2>
+      </button>
 
       <ion-item-options icon-left side="right">
         <button ion-button color="danger" (click)="deleteGame(game)">

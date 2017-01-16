@@ -4,6 +4,7 @@ import {ActiveGamePage} from "../activegame/activegame";
 import {ActiveGameStatPage} from "../activegamestat/activegamestat";
 import {Game, Team} from "../../../www/assets/scripts/gametypes";
 import {StorageService} from "../../../www/assets/scripts/storageservice";
+import {GamePlayerStatListPage} from "../game-player-stat-list/game-player-stat-list";
 
 @Component({
   templateUrl: 'tabs.html'
@@ -15,6 +16,7 @@ export class TabsPage {
 
   playerRoot: any = ChoosePlayersPage;
   activeGameRoot: any = ActiveGamePage;
+  activePlayersPage : any = GamePlayerStatListPage;
   activeGameStatRoot: any = ActiveGameStatPage;
 
   constructor(storageService : StorageService) {

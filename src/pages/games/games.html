@@ -17,7 +17,7 @@
           <img src="assets/images/game.png">
         </ion-avatar>
         <h2 *ngSwitchCase="''">{{game.opponent}}</h2>
-        <h2 *ngSwitchDefault>{{game.opponent}} - {{game.startTime}}</h2>
+        <h2 *ngSwitchDefault>{{game.opponent}} ( {{game.goals}} - {{game.goalsOpponent}} )</h2>
       </button>
 
       <ion-item-options icon-left side="right">

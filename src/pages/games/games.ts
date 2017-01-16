@@ -7,6 +7,7 @@ import {Team} from "../../../www/assets/scripts/gametypes";
 import {TabsPage} from "../tabs/tabs";
 
 
+
 @Component({
   selector: 'page-games',
   templateUrl: 'games.html'
@@ -15,6 +16,7 @@ export class GamesPage {
 
   games;
   team : Team;
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public storageService : StorageService) {
     this.games = storageService.getActiveGames();
     this.team = storageService.getCurrentTeam();
@@ -39,6 +41,8 @@ export class GamesPage {
     this.navCtrl.pop();
     this.navCtrl.push(TabsPage);
   }
+
+
 }
 
 

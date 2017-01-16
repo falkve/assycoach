@@ -19,6 +19,10 @@ import {ChoosePlayersPage} from "../pages/chooseplayer/chooseplayer";
 import {ActiveGamePage} from "../pages/activegame/activegame";
 import {ActiveGameStatPage} from "../pages/activegamestat/activegamestat";
 import {ChooseGamePositionPage} from "../pages/choosegameposition/chosegameposition";
+import {GamePlayerStatPage} from "../pages/game-player-stat/game-player-stat";
+import {GamePlayerStatListPage} from "../pages/game-player-stat-list/game-player-stat-list";
+import {ChangeGamePositionPage} from "../pages/change-game-position/change-game-position";
+import {BasetabsPage} from "../pages/basetabs/basetabs";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAZXxk_yvqzmzvljKQTa7zFtCE5pRVZuKQ",
@@ -45,7 +49,11 @@ export const firebaseConfig = {
     ChoosePlayersPage,
     ActiveGamePage,
     ActiveGameStatPage,
-    ChooseGamePositionPage
+    ChooseGamePositionPage,
+    GamePlayerStatPage,
+    GamePlayerStatListPage,
+    ChangeGamePositionPage,
+    BasetabsPage
   ],
   imports: [
     IonicModule.forRoot(CoachAssistantApp),
@@ -69,7 +77,11 @@ export const firebaseConfig = {
     ChoosePlayersPage,
     ActiveGamePage,
     ActiveGameStatPage,
-    ChooseGamePositionPage
+    ChooseGamePositionPage,
+    GamePlayerStatPage,
+    GamePlayerStatListPage,
+    ChangeGamePositionPage,
+    BasetabsPage
   ],
   providers: [StorageService,{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

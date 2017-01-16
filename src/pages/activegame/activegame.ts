@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import {ModalController, NavParams} from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import {StorageService} from "../../../www/assets/scripts/storageservice";
-import {Team, Game} from "../../../www/assets/scripts/gametypes";
+import {Team, Game, GamePlayer} from "../../../www/assets/scripts/gametypes";
+import {ChangeGamePositionPage} from "../change-game-position/change-game-position";
+import {FirebaseListObservable} from "angularfire2";
 
 
 @Component({
@@ -18,11 +20,11 @@ export class ActiveGamePage {
     this.game = storageService.getCurrentGame();
     this.team = storageService.getCurrentTeam();
     this.gamePlayers = storageService.getCurrentGamePlayers();
-
   }
 
   changePosition(gamePlayer){
-
+    let profileModal = this.modalCtrl.create(ChangeGamePositionPage, { player: gamePlayer });
+    profileModal.present();
   }
 }
 

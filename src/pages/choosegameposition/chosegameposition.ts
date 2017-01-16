@@ -1,7 +1,7 @@
 import {Component, ElementRef} from '@angular/core';
 import {NavController, NavParams, ViewController} from 'ionic-angular';
 import 'rxjs/add/operator/map';
-import {GamePosition, Team, Game, GamePlayer} from "../../../www/assets/scripts/gametypes";
+import {GamePosition, Team, Game, GamePlayer, ActiveGamePosition} from "../../../www/assets/scripts/gametypes";
 import {Player} from "../../../www/assets/scripts/playertypes";
 import {StorageService} from "../../../www/assets/scripts/storageservice";
 
@@ -31,8 +31,9 @@ export class ChooseGamePositionPage {
     this.team = storageService.getCurrentTeam();
     this.game = storageService.currentGame;
     this.currentGamePlayers = storageService.getCurrentGamePlayers();
+  }
 
-
+  loadPlayers(){
     this.storageService.loadCurrentGamePlayers(this.team.id, this.game.id, (snapshot)=>{
       snapshot.forEach((childSnapshot) => {
         let position = childSnapshot.val().position;
@@ -40,9 +41,8 @@ export class ChooseGamePositionPage {
       });
     });
 
-    storageService.loadPositions(this.team.id, (snapshot)=>{
+    this.storageService.loadPositions(this.team.id, (snapshot)=>{
       snapshot.forEach((childSnapshot) => {
-
         this.nofPositionsSize++;
         let exists = false;
         let position = childSnapshot.val();
@@ -61,30 +61,21 @@ export class ChooseGamePositionPage {
     let position = new GamePosition('Bench', 'B');
     position.id = 'Bench';
     this.positions.push(position);
-
   }
 
   ngAfterViewInit() {
-    this.ele.nativeElement.parentElement.setAttribute("class","OVERRIDE_choosegameposition "+ this.ele.nativeElement.parentElement.getAttribute("class"));
+    this.loadPlayers();
+    //this.ele.nativeElement.parentElement.setAttribute("class","OVERRIDE_choosegameposition "+ this.ele.nativeElement.parentElement.getAttribute("class"));
   }
 
   addPosition(position){
-    let gamePlayer = new GamePlayer(this.player, position);
-    console.log('Adding position')
-    this.currentGamePlayers.push(gamePlayer).then(ref => {
-      if(this.usedPositions.length >= (this.nofPositionsSize-1)){
-        this.game.isTeamComplete = true;
-        this.close();
-        /*console.log('Adding position 2')
-        this.storageService.updateActiveGame(this.game, ()=>{
-          console.log('Adding position 3')
-
-        });*/
-      } else{
-        this.close();
-      }
-
+    let activeGamePosition = new ActiveGamePosition(position.name, position.shorty);
+    activeGamePosition.id = position.id;
+    let gamePlayer = new GamePlayer(this.player, activeGamePosition);
+    this.storageService.addCurentGamePlayer(gamePlayer, () => {
+      this.close();
     });
+
   }
 
   close(){

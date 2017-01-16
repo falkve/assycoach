@@ -6,6 +6,29 @@
 
 
 <ion-content>
+  <button *ngIf="currentGame.startTime == ''" ion-button block color="secondary" (click)="startGame()">Start Match</button>
+  <ion-grid *ngIf="currentGame.startTime != ''">
+    <ion-row>
+      <ion-col width-50><h2>{{currentTeam.name}}</h2></ion-col>
+      <ion-col width-50><h2>{{currentGame.opponent}}</h2></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-50>{{currentGame.goals}}</ion-col>
+      <ion-col width-50>{{currentGame.goalsOpponent}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-50>
+        <ion-buttons>
+          <button ion-button color="secondary" round (click)="addGoal(currentTeam.name)">Goal!</button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col width-50>
+        <ion-buttons>
+          <button ion-button color="secondary" round (click)="addGoal(currentGame.opponent)">Goal!</button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
 

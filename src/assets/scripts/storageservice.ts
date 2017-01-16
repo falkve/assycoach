@@ -29,32 +29,50 @@ export class StorageService {
 
   constructor(af: AngularFire) {
     this.af = af;
-    this.teams = this.af.database.list('/teams');
+    this.teams = this.af.database.list('/teams', {
+      query: {
+        orderByChild: 'name'
+      }
+    });
   }
 
   initiate(team : Team){
     this.currentTeam = team;
 
     let teamId = team.id;
-    this.players = this.af.database.list('/' + teamId + '/players');
-    this.gamePositions = this.af.database.list('/' + teamId + '/positions');
-    this.activeGames = this.af.database.list('/' + teamId + '/activegames');
+    this.players = this.af.database.list('/' + teamId + '/players', {
+      query: {
+        orderByChild: 'name'
+      }
+    });
+
+    this.gamePositions = this.af.database.list('/' + teamId + '/positions',{
+      query: {
+        orderByChild: 'name'
+      }
+    });
+
+    this.activeGames = this.af.database.list('/' + teamId + '/activegames', {
+      query: {
+        orderByChild: 'opponent'
+      }
+    });
   }
 
   public loadTeams(callbackFunc){
-    firebase.database().ref('/teams').once('value', callbackFunc, this);
+    firebase.database().ref('/teams').orderByChild('name').once('value', callbackFunc, this);
   }
 
   public loadPositions(teamId, callbackFunc){
-    firebase.database().ref('/'+teamId+'/positions').once('value', callbackFunc, this);
+    firebase.database().ref('/'+teamId+'/positions').orderByChild('name').once('value', callbackFunc, this);
   }
 
   public loadPlayers(teamId, callbackFunc){
-    firebase.database().ref('/'+teamId+'/players').once('value', callbackFunc, this);
+    firebase.database().ref('/'+teamId+'/players').orderByChild('name').once('value', callbackFunc, this);
   }
 
   public loadCurrentGamePlayers(teamId, currentGameId, callbackFunc){
-    firebase.database().ref('/'+teamId+'/' + currentGameId + '/currentgameplayers').once('value', callbackFunc, this);
+    firebase.database().ref('/'+teamId+'/' + currentGameId + '/currentgameplayers').orderByChild('name').once('value', callbackFunc, this);
   }
 
 
@@ -102,9 +120,9 @@ export class StorageService {
       }
     });
   }
-  updateActiveGame(game, callbackFunc){
+  updateActiveGame(game){
     var copy = Util.cloneGame(game);
-    this.activeGames.update(copy.id, copy).then(callbackFunc);
+    this.activeGames.update(copy.id, copy);
   }
 
   public setCurrentGame(game){
@@ -118,6 +136,17 @@ export class StorageService {
 
   getCurrentGamePlayers(){
     return this.currentGamePlayers;
+  }
+
+  addCurentGamePlayer(gamePlayer, callbackFunc){
+    this.currentGamePlayers.push(gamePlayer).then(ref => {
+      gamePlayer.id = ref.key;
+      this.currentGamePlayers.update(gamePlayer.id, gamePlayer).then(callbackFunc);
+    });
+  }
+  updateCurrentGamePlayer(gamePlayer){
+    var copy = Util.cloneGamePlayer(gamePlayer);
+    this.currentGamePlayers.update(copy.id, copy);
   }
 
   getCurrentTeam(){

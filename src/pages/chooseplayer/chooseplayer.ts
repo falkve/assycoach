@@ -22,20 +22,18 @@ export class ChoosePlayersPage {
     this.team = storageService.getCurrentTeam();
     this.game = storageService.getCurrentGame();
     this.positions = storageService.getGamePositions();
-    this.loadPlayerList();
   }
 
   addPlayer(player){
     let profileModal = this.modalCtrl.create(ChooseGamePositionPage, { player: player });
     profileModal.onDidDismiss(data => {
-      this.loadPlayerList();
+      this.loadPlayers();
     });
 
     profileModal.present();
   }
 
-  loadPlayerList(){
-    console.log("Reloading gameplayers");
+  loadPlayers(){
     this.players = new Array <Player>();
     this.storageService.loadPlayers(this.team.id, (snapshot)=>{
       snapshot.forEach((childSnapshot) => {
@@ -56,11 +54,8 @@ export class ChoosePlayersPage {
 
   }
 
-  startGame(){
-    this.game.startTime = new Date().toDateString();
-    this.storageService.updateActiveGame(this.game, () => {
-      this.navCtrl.parent.select(2);
-    });
+  ngAfterViewInit() {
+    this.loadPlayers();
   }
 }
 

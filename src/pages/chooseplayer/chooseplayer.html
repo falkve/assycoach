@@ -10,7 +10,6 @@
 
 
 <ion-content>
-  <button *ngIf="game.isTeamComplete" ion-button block color="secondary" (click)="startGame()">Start Match</button>
   <ion-list>
     <ion-item-sliding *ngFor="let player of players" >
       <button ion-item (click)="addPlayer(player)">

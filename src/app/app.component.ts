@@ -29,7 +29,7 @@ export class CoachAssistantApp {
       { title: 'Login', component: LoginPage },
       { title: 'Players', component: PlayerPage },
       { title: 'Positions', component: GamePositionsPage },
-      { title: 'Match', component: GamesPage },
+      { title: 'Games', component: GamesPage },
       { title: 'Switch Team', component: TeamsPage }
      // { title: 'History', component: TabsPage }
       //{ title: 'My First List', component: ListPage }

@@ -1,0 +1,27 @@
+<!--
+  Generated template for the ChangeGamePosition page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Change Player</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let gamePlayer of gamePlayers | async">
+      <button ion-item  *ngIf="gamePlayer.position.id == 'Bench'" (click)="changePosition(gamePlayer)">
+        <ion-avatar item-left>
+          <img src="assets/icon/apple-icon.png">
+        </ion-avatar>
+        <h2>{{gamePlayer.player.number}} - {{gamePlayer.player.name}}</h2>
+      </button>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

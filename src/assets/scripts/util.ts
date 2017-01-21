@@ -6,6 +6,7 @@ import {GamePlayer, ActiveGamePosition} from "../../../www/assets/scripts/gamety
  */
 
 
+
 export class Util{
 
   static generateId(prefix){
@@ -47,8 +48,69 @@ export class Util{
     let newPosition = Util.cloneActiveGamePosition(gamePlayer.position);
     let newGamePlayer = new GamePlayer(newPlayer, newPosition);
     newGamePlayer.id = gamePlayer.id;
+
+    if(gamePlayer.positions != null){
+      for (let position of gamePlayer.positions) {
+        let historyPosition = Util.cloneActiveGamePosition(position);
+        newGamePlayer.historyPositions.push(historyPosition);
+      }
+    }
+
     return newGamePlayer;
   }
 
 
+
+
+  public static getElapsedTime(from, to){
+
+      var timeDiff = to - from;
+
+    // strip the ms
+      timeDiff /= 1000;
+
+    // get seconds (Original had 'round' which incorrectly counts 0:28, 0:29, 1:30 ... 1:59, 1:0)
+      var seconds = Math.round(timeDiff % 60);
+
+    // remove seconds from the date
+      timeDiff = Math.floor(timeDiff / 60);
+
+    // get minutes
+    var minutes = Math.round(timeDiff % 60);
+
+    // remove minutes from the date
+    timeDiff = Math.floor(timeDiff / 60);
+
+    // get hours
+    var hours = Math.round(timeDiff % 24);
+
+    // remove hours from the date
+    timeDiff = Math.floor(timeDiff / 24);
+
+    // the rest of timeDiff is number of days
+    var days = timeDiff ;
+
+    return new ElapsedTime(days, hours, minutes, seconds);
+  }
+
+}
+
+export class ElapsedTime{
+
+  days :string = '';
+  hours :string = '';
+  minutes :string = '';
+  seconds :string = '';
+
+
+  constructor(days, hours, minutes, seconds){
+    this.days = days;
+    this.hours = hours;
+    this.minutes = minutes;
+    this.seconds = seconds;
+  }
+
+  getTime(){
+    return (this.days!=''?this.days+' d, ':'') +  (this.hours!=''?this.hours+' h, ':'') + (this.minutes!=''?this.minutes+' m, ':'') + this.seconds + ' s';
+  }
 }

@@ -5,8 +5,8 @@ import {Player} from "./playertypes";
 export class Game{
   public id : string;
   public opponent: string;
-  public startTime : string = '';
-  public endTime : string = '';
+  public startTime : number = 0;
+  public endTime : number = 0;
 
   public goals : number = 0;
   public goalsOpponent : number = 0;
@@ -27,8 +27,8 @@ export class GamePosition{
 }
 
 export class ActiveGamePosition extends GamePosition{
-  public startTime : string = '';
-  public endTime : string = '';
+  public startTime : number = 0;
+  public endTime : number = 0;
 }
 
 export class Team{
@@ -46,6 +46,7 @@ export class GamePlayer{
   public player : Player;
   public position : ActiveGamePosition;
 
+  public historyPositions : Array<ActiveGamePosition>;
 
   constructor(player: Player, position: ActiveGamePosition) {
     this.player = player;

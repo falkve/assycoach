@@ -5,6 +5,8 @@ import {GamePage} from "../game/game";
 import {StorageService} from "../../../www/assets/scripts/storageservice";
 import {Team} from "../../../www/assets/scripts/gametypes";
 import {TabsPage} from "../tabs/tabs";
+import {Util} from "../../../www/assets/scripts/util";
+import Timer = NodeJS.Timer;
 
 
 
@@ -16,6 +18,8 @@ export class GamesPage {
 
   games;
   team : Team;
+  timeIntervalId : Timer = null;
+  date : Date = new Date();
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public storageService : StorageService) {
     this.games = storageService.getActiveGames();
@@ -36,12 +40,30 @@ export class GamesPage {
     this.games.remove(game);
   }
 
+
   goToGame(game){
     this.storageService.setCurrentGame(game);
     this.navCtrl.pop();
     this.navCtrl.push(TabsPage);
   }
 
+  calcTime(dateTime){
+    if(dateTime != 0){
+      return Util.getElapsedTime(dateTime,this.date.getTime()).getTime();
+    } else {
+      return '';
+    }
+  }
+  ionViewWillEnter() {
+    this.timeIntervalId = setInterval(()=>{
+      this.date = new Date();
+    },1000);
+  }
+
+  ionViewWillLeave(){
+    clearInterval(this.timeIntervalId);
+    this.timeIntervalId = null;
+  }
 
 }
 

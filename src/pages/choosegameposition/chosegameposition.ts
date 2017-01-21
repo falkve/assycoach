@@ -21,6 +21,7 @@ export class ChooseGamePositionPage {
   game : Game;
   player : Player;
 
+
   currentGamePlayers;
 
   nofPositionsSize = 0;
@@ -39,8 +40,11 @@ export class ChooseGamePositionPage {
         let position = childSnapshot.val().position;
         this.usedPositions.push(position);
       });
+      this.loadPositions();
     });
+  }
 
+  loadPositions(){
     this.storageService.loadPositions(this.team.id, (snapshot)=>{
       snapshot.forEach((childSnapshot) => {
         this.nofPositionsSize++;
@@ -72,7 +76,7 @@ export class ChooseGamePositionPage {
     let activeGamePosition = new ActiveGamePosition(position.name, position.shorty);
     activeGamePosition.id = position.id;
     let gamePlayer = new GamePlayer(this.player, activeGamePosition);
-    this.storageService.addCurentGamePlayer(gamePlayer, () => {
+    this.storageService.addCurrentGamePlayer(gamePlayer, () => {
       this.close();
     });
 

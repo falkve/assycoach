@@ -20,6 +20,7 @@ export class StorageService {
   private teams : FirebaseListObservable<Team[]>;
 
   private activeGames : FirebaseListObservable<Game[]>;
+  private historyGames : FirebaseListObservable<Game[]>;
 
   private currentTeam : Team;
   currentGame : Game;
@@ -28,6 +29,7 @@ export class StorageService {
 
 
   constructor(af: AngularFire) {
+
     this.af = af;
     this.teams = this.af.database.list('/teams', {
       query: {
@@ -55,6 +57,12 @@ export class StorageService {
     this.activeGames = this.af.database.list('/' + teamId + '/activegames', {
       query: {
         orderByChild: 'opponent'
+      }
+    });
+
+    this.historyGames = this.af.database.list('/' + teamId + '/historygames', {
+      query: {
+        orderByChild: 'startTime'
       }
     });
   }
@@ -120,6 +128,20 @@ export class StorageService {
       }
     });
   }
+
+  removeActiveGame(game){
+    this.activeGames.remove(game.id);
+  }
+
+  addHistoryGame(game){
+    var copy = Util.cloneGame(game);
+    copy.id = null;
+    this.historyGames.push(copy).then(ref => {
+      copy.id = ref.key;
+      this.historyGames.update(copy.id, copy);
+    });
+  }
+
   updateActiveGame(game){
     var copy = Util.cloneGame(game);
     this.activeGames.update(copy.id, copy);
@@ -138,7 +160,7 @@ export class StorageService {
     return this.currentGamePlayers;
   }
 
-  addCurentGamePlayer(gamePlayer, callbackFunc){
+  addCurrentGamePlayer(gamePlayer, callbackFunc){
     this.currentGamePlayers.push(gamePlayer).then(ref => {
       gamePlayer.id = ref.key;
       this.currentGamePlayers.update(gamePlayer.id, gamePlayer).then(callbackFunc);
@@ -149,10 +171,10 @@ export class StorageService {
     this.currentGamePlayers.update(copy.id, copy);
   }
 
+
   getCurrentTeam(){
     return this.currentTeam;
   }
-
 
 }
 

@@ -1,6 +1,8 @@
 import {Component, ElementRef} from '@angular/core';
 import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {StorageService} from "../../../www/assets/scripts/storageservice";
+import {Util} from "../../../www/assets/scripts/util";
+import {ActiveGamePosition} from "../../../www/assets/scripts/gametypes";
 
 /*
   Generated class for the ChangeGamePosition page.
@@ -16,19 +18,45 @@ export class ChangeGamePositionPage {
 
   gamePlayers;
   player;
+  currentGame;
   constructor(public navCtrl: NavController, private ele: ElementRef, public storageService : StorageService, params: NavParams, public viewCtrl : ViewController) {
     this.gamePlayers = storageService.getCurrentGamePlayers();
     this.player = params.get('player');
-
+    this.currentGame = storageService.getCurrentGame();
   }
 
   changePosition(gamePlayer){
-      let position = gamePlayer.position;
-      gamePlayer.position = this.player.position;
-      this.player.position = position;
-      this.storageService.updateCurrentGamePlayer(this.player);
-      this.storageService.updateCurrentGamePlayer(gamePlayer);
-      this.close();
+
+    if(this.currentGame.startTime != null){
+      gamePlayer.position.endTime = new Date().getTime();
+      this.player.position.endTime = new Date().getTime();
+
+      if(gamePlayer.historyPositions == null){
+        gamePlayer.historyPositions = new Array<ActiveGamePosition>();
+      }
+      if(this.player.historyPositions == null){
+        this.player.historyPositions = new Array<ActiveGamePosition>();
+      }
+      gamePlayer.historyPositions.push(Util.cloneActiveGamePosition(gamePlayer.position));
+      this.player.historyPositions.push(Util.cloneActiveGamePosition(this.player.position));
+
+
+      let newDate = new Date().getTime();
+      gamePlayer.position.startTime = newDate;
+      this.player.position.startTime = newDate;
+      gamePlayer.position.endTime = 0;
+      this.player.position.endTime = 0;
+
+    }
+
+    let position = gamePlayer.position;
+    gamePlayer.position = this.player.position;
+    this.player.position = position;
+
+    this.storageService.updateCurrentGamePlayer(gamePlayer);
+    this.storageService.updateCurrentGamePlayer(this.player);
+
+    this.close();
   }
 
   ngAfterViewInit() {

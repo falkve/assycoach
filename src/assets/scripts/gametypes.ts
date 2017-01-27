@@ -11,9 +11,29 @@ export class Game{
   public goals : number = 0;
   public goalsOpponent : number = 0;
 
+  public period : Period;
+
+  public historyPeriods : Array<Period>;
+
   constructor(opponent: string) {
     this.opponent = opponent;
+    this.historyPeriods = new Array<Period>();
   }
+}
+
+
+export class Period{
+  public period : number = 0;
+  public startTime : number = 0;
+  public endTime : number = 0;
+
+  public goals : number = 0;
+  public goalsOpponent : number = 0;
+
+  constructor(period: number) {
+    this.period = period;
+  }
+
 }
 
 export class GamePosition{
@@ -48,10 +68,12 @@ export class GamePlayer{
 
   public historyPositions : Array<ActiveGamePosition>;
 
+
   constructor(player: Player, position: ActiveGamePosition) {
     this.player = player;
     this.position = position;
     this.name = player.name; //For sorting
+    this.historyPositions = new Array<ActiveGamePosition>();
   }
 
 }

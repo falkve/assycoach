@@ -2,10 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import {LoginPage} from "../pages/login/login";
-import {PlayerPage} from "../pages/player/player";
-import {GamePositionsPage} from "../pages/gamepositions/gamepositions";
-import {GamesPage} from "../pages/games/games";
-import {TeamsPage} from "../pages/teams/teams";
+import {ListPlayersPage} from "../pages/list-players/list-players";
+import {GamePositionsListPage} from "../pages/game-positions-list/game-positions-list";
+import {ListGamesPage} from "../pages/list-games/list-games";
+import {ListTeamsPage} from "../pages/list-teams/list-teams";
+import {ListHistoryGamesPage} from "../pages/list-history-games/list-history-games";
 
 
 @Component({
@@ -15,7 +16,7 @@ export class CoachAssistantApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage: any = TeamsPage;
+  rootPage: any = ListTeamsPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -27,10 +28,11 @@ export class CoachAssistantApp {
     // set our app's pages
     this.pages = [
       { title: 'Login', component: LoginPage },
-      { title: 'Players', component: PlayerPage },
-      { title: 'Positions', component: GamePositionsPage },
-      { title: 'Games', component: GamesPage },
-      { title: 'Switch Team', component: TeamsPage }
+      { title: 'Players', component: ListPlayersPage },
+      { title: 'Positions', component: GamePositionsListPage },
+      { title: 'Games', component: ListGamesPage },
+      { title: 'History', component: ListHistoryGamesPage },
+      { title: 'Switch Team', component: ListTeamsPage }
      // { title: 'History', component: TabsPage }
       //{ title: 'My First List', component: ListPage }
     ];

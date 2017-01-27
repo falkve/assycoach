@@ -15,13 +15,11 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item-sliding *ngFor="let gamePlayer of gamePlayers | async">
-      <button ion-item  *ngIf="gamePlayer.position.id == 'Bench'" (click)="changePosition(gamePlayer)">
+    <ion-item button (click)="changePosition(gamePlayer)" *ngFor="let gamePlayer of gamePlayers | async" [hidden]="gamePlayer.position.id!='Bench'">
         <ion-avatar item-left>
           <img src="assets/icon/apple-icon.png">
         </ion-avatar>
-        <h2>{{gamePlayer.player.number}} - {{gamePlayer.player.name}}</h2>
-      </button>
-    </ion-item-sliding>
+        <h2>{{gamePlayer.player.name}} ({{gamePlayer.player.number}})</h2>
+    </ion-item>
   </ion-list>
 </ion-content>

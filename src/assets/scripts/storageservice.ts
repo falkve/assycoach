@@ -24,6 +24,7 @@ export class StorageService {
 
   private currentTeam : Team;
   currentGame : Game;
+  currentHistoryGame : Game;
 
   private currentGamePlayers : FirebaseListObservable<GamePlayer[]>;
 
@@ -83,7 +84,6 @@ export class StorageService {
     firebase.database().ref('/'+teamId+'/' + currentGameId + '/currentgameplayers').orderByChild('name').once('value', callbackFunc, this);
   }
 
-
   getPlayers(){
     return this.players;
   }
@@ -119,13 +119,14 @@ export class StorageService {
     return this.activeGames;
   }
 
-  addActiveGame(game, setActive){
+  getHistoryGames(){
+    return this.historyGames;
+  }
+
+  addActiveGame(game, callbackFunc){
     this.activeGames.push(game).then(ref => {
       game.id = ref.key;
-      this.activeGames.update(game.id, game);
-      if(setActive){
-        this.setCurrentGame(game);
-      }
+      this.activeGames.update(game.id, game).then(callbackFunc);
     });
   }
 
@@ -149,7 +150,15 @@ export class StorageService {
 
   public setCurrentGame(game){
     this.currentGame = game;
-    this.currentGamePlayers = this.af.database.list('/' + this.currentTeam.id + '/' + game.id + '/currentgameplayers');
+    this.currentGamePlayers = this.af.database.list('/' + this.currentTeam.id + '/' + game.id + '/currentgameplayers', {
+      query: {
+        orderByChild: 'position/startTime'
+      }
+    });
+  }
+
+  public setCurrentHistoryGame(game){
+    this.currentHistoryGame = game;
   }
 
   public getCurrentGame(){

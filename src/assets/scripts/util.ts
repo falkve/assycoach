@@ -1,6 +1,6 @@
 import {Game} from "./gametypes";
 import {Player} from "../../../www/assets/scripts/playertypes";
-import {GamePlayer, ActiveGamePosition} from "../../../www/assets/scripts/gametypes";
+import {GamePlayer, ActiveGamePosition, Period} from "../../../www/assets/scripts/gametypes";
 /**
  * Created by vonfalk on 2017-01-04.
  */
@@ -26,7 +26,24 @@ export class Util{
       newGame.endTime = game.endTime;
       newGame.goals = game.goals;
       newGame.goalsOpponent = game.goalsOpponent;
-      return newGame;
+      newGame.period = game.period;
+
+    if(game.historyPeriods != null){
+      for (let period of game.historyPeriods) {
+        let historyPeriod = Util.clonePeriod(period);
+        newGame.historyPeriods.push(historyPeriod);
+      }
+    }
+    return newGame;
+  }
+
+  public static clonePeriod(period){
+    let newPeriod = new Period(period.period);
+    newPeriod.endTime = period.endTime;
+    newPeriod.startTime = period.startTime;
+    newPeriod.goals = period.goals;
+    newPeriod.goalsOpponent = period.goalsOpponent;
+    return newPeriod;
   }
 
   public static clonePlayer(player){
@@ -49,8 +66,8 @@ export class Util{
     let newGamePlayer = new GamePlayer(newPlayer, newPosition);
     newGamePlayer.id = gamePlayer.id;
 
-    if(gamePlayer.positions != null){
-      for (let position of gamePlayer.positions) {
+    if(gamePlayer.historyPositions != null){
+      for (let position of gamePlayer.historyPositions) {
         let historyPosition = Util.cloneActiveGamePosition(position);
         newGamePlayer.historyPositions.push(historyPosition);
       }

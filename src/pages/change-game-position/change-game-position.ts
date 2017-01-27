@@ -3,6 +3,7 @@ import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {StorageService} from "../../../www/assets/scripts/storageservice";
 import {Util} from "../../../www/assets/scripts/util";
 import {ActiveGamePosition} from "../../../www/assets/scripts/gametypes";
+import 'rxjs/add/operator/map'
 
 /*
   Generated class for the ChangeGamePosition page.
@@ -25,11 +26,14 @@ export class ChangeGamePositionPage {
     this.currentGame = storageService.getCurrentGame();
   }
 
+
   changePosition(gamePlayer){
 
     if(this.currentGame.startTime != null){
-      gamePlayer.position.endTime = new Date().getTime();
-      this.player.position.endTime = new Date().getTime();
+      let endTime = new Date().getTime();
+
+      gamePlayer.position.endTime = endTime;
+      this.player.position.endTime = endTime;
 
       if(gamePlayer.historyPositions == null){
         gamePlayer.historyPositions = new Array<ActiveGamePosition>();

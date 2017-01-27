@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {NavController, LoadingController} from 'ionic-angular';
 import {StorageService} from "../../../www/assets/scripts/storageservice";
 import {Team} from "../../../www/assets/scripts/gametypes";
-import {GamePositionsPage} from "../gamepositions/gamepositions";
-import {PlayerPage} from "../player/player";
+import {GamePositionsListPage} from "../game-positions-list/game-positions-list";
+import {ListPlayersPage} from "../list-players/list-players";
 
 @Component({
   selector: 'page-start',
@@ -32,11 +32,11 @@ export class StartPage {
 
   addPositions(){
     this.navCtrl.pop();
-    this.navCtrl.push(GamePositionsPage);
+    this.navCtrl.push(GamePositionsListPage);
   }
 
   addPlayers(){
     this.navCtrl.pop();
-    this.navCtrl.push(PlayerPage);
+    this.navCtrl.push(ListPlayersPage);
   }
 }

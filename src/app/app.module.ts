@@ -1,28 +1,29 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { CoachAssistantApp } from './app.component';
-import { PlayerPage } from '../pages/player/player';
+import { ListPlayersPage } from '../pages/list-players/list-players';
 import { TabsPage } from '../pages/tabs/tabs';
-import {AddPlayerPage} from "../pages/addplayer/addplayer";
+import {AddPlayerPage} from "../pages/add-player/add-player";
 import {BrowserModule} from "@angular/platform-browser";
 import {AngularFireModule} from "angularfire2";
 import {LoginPage} from "../pages/login/login";
 import {StartPage} from "../pages/start/start";
 import {StorageService} from "../../www/assets/scripts/storageservice";
-import {GamePositionPage} from "../pages/gameposition/gameposition";
-import {GamePage} from "../pages/game/game";
-import {GamesPage} from "../pages/games/games";
-import {GamePositionsPage} from "../pages/gamepositions/gamepositions";
-import {TeamPage} from "../pages/team/team";
-import {TeamsPage} from "../pages/teams/teams";
-import {ChoosePlayersPage} from "../pages/chooseplayer/chooseplayer";
-import {ActiveGamePage} from "../pages/activegame/activegame";
-import {ActiveGameStatPage} from "../pages/activegamestat/activegamestat";
-import {ChooseGamePositionPage} from "../pages/choosegameposition/chosegameposition";
+import {AddGamePositionPage} from "../pages/add-game-position/add-game-position";
+import {AddGamePage} from "../pages/add-game/add-game";
+import {ListGamesPage} from "../pages/list-games/list-games";
+import {GamePositionsListPage} from "../pages/game-positions-list/game-positions-list";
+import {AddTeamPage} from "../pages/add-team/add-team";
+import {ListTeamsPage} from "../pages/list-teams/list-teams";
+import {ChoosePlayersPage} from "../pages/choose-player/choose-player";
+import {ViewActiveGamePage} from "../pages/view-active-game/view-active-game";
+import {ViewActiveGameStatPage} from "../pages/view-active-game-stat/view-active-game-stat";
+import {ChooseGamePositionPage} from "../pages/choose-game-position/choose-game-position";
 import {GamePlayerStatPage} from "../pages/game-player-stat/game-player-stat";
-import {GamePlayerStatListPage} from "../pages/game-player-stat-list/game-player-stat-list";
+import {ListGamePlayerStatPage} from "../pages/list-game-player-stat/list-game-player-stat";
 import {ChangeGamePositionPage} from "../pages/change-game-position/change-game-position";
 import {BasetabsPage} from "../pages/basetabs/basetabs";
+import {ListHistoryGamesPage} from "../pages/list-history-games/list-history-games";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAZXxk_yvqzmzvljKQTa7zFtCE5pRVZuKQ",
@@ -35,25 +36,26 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     CoachAssistantApp,
-    GamePositionsPage,
-    GamePositionPage,
-    PlayerPage,
+    GamePositionsListPage,
+    AddGamePositionPage,
+    ListPlayersPage,
     TabsPage,
     AddPlayerPage,
     LoginPage,
     StartPage,
-    GamePage,
-    GamesPage,
-    TeamPage,
-    TeamsPage,
+    AddGamePage,
+    ListGamesPage,
+    AddTeamPage,
+    ListTeamsPage,
     ChoosePlayersPage,
-    ActiveGamePage,
-    ActiveGameStatPage,
+    ViewActiveGamePage,
+    ViewActiveGameStatPage,
     ChooseGamePositionPage,
     GamePlayerStatPage,
-    GamePlayerStatListPage,
+    ListGamePlayerStatPage,
     ChangeGamePositionPage,
-    BasetabsPage
+    BasetabsPage,
+    ListHistoryGamesPage
   ],
   imports: [
     IonicModule.forRoot(CoachAssistantApp),
@@ -63,25 +65,26 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     CoachAssistantApp,
-    GamePositionsPage,
-    GamePositionPage,
-    PlayerPage,
+    GamePositionsListPage,
+    AddGamePositionPage,
+    ListPlayersPage,
     TabsPage,
     AddPlayerPage,
     LoginPage,
     StartPage,
-    GamePage,
-    GamesPage,
-    TeamPage,
-    TeamsPage,
+    AddGamePage,
+    ListGamesPage,
+    AddTeamPage,
+    ListTeamsPage,
     ChoosePlayersPage,
-    ActiveGamePage,
-    ActiveGameStatPage,
+    ViewActiveGamePage,
+    ViewActiveGameStatPage,
     ChooseGamePositionPage,
     GamePlayerStatPage,
-    GamePlayerStatListPage,
+    ListGamePlayerStatPage,
     ChangeGamePositionPage,
-    BasetabsPage
+    BasetabsPage,
+    ListHistoryGamesPage
   ],
   providers: [StorageService,{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

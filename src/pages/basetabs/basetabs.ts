@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {Team, Game} from "../../../www/assets/scripts/gametypes";
 import {StorageService} from "../../../www/assets/scripts/storageservice";
-import {PlayerPage} from "../player/player";
-import {GamePositionsPage} from "../gamepositions/gamepositions";
+import {ListPlayersPage} from "../list-players/list-players";
+import {GamePositionsListPage} from "../game-positions-list/game-positions-list";
 
 /*
   Generated class for the Basetabs page.
@@ -19,8 +19,8 @@ export class BasetabsPage {
   game : Game;
   team : Team;
 
-  playerRoot: any = PlayerPage;
-  positionRoot: any = GamePositionsPage;
+  playerRoot: any = ListPlayersPage;
+  positionRoot: any = GamePositionsListPage;
 
   constructor(storageService : StorageService) {
     this.team = storageService.getCurrentTeam();

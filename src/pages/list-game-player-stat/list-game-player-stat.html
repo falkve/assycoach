@@ -15,15 +15,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      {{gamePlayer.name}}
-    </ion-list-header>
-    <ion-item button *ngFor="let position of gamePlayer.historyPositions">
+      <ion-item button (click)="showPlayerStat(gamePlayer)" ion-item *ngFor="let gamePlayer of currentGamePlayers | async">
         <ion-avatar item-left>
           <img src="assets/icon/apple-icon.png">
         </ion-avatar>
-        <h2>{{position.name}}</h2>
-        <h3>{{calcTime(position.startTime,position.endTime)}}</h3>
-    </ion-item>
+        <h2>{{gamePlayer.player.name}} ({{gamePlayer.player.number}})</h2>
+        <h3>{{gamePlayer.position.name}}</h3>
+      </ion-item>
   </ion-list>
 </ion-content>

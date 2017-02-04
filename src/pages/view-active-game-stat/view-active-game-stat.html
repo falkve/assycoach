@@ -31,12 +31,12 @@
     <ion-row *ngIf="currentGame.endTime==0">
       <ion-col width-50 text-right="">
         <ion-buttons >
-          <button ion-button color="secondary" round (click)="addGoal(currentTeam.name)">Goal!</button>
+          <button ion-button color="secondary" round (click)="addGoal(currentTeam.name)" [attr.disabled]="currentGame.period==null?'':null">Goal!</button>
         </ion-buttons>
       </ion-col>
       <ion-col width-50 text-left="">
         <ion-buttons>
-          <button ion-button color="secondary" round (click)="addGoal(currentGame.opponent)">Goal!</button>
+          <button ion-button color="secondary" round (click)="addGoal(currentGame.opponent)" [attr.disabled]="currentGame.period==null?'':null" >Goal!</button>
         </ion-buttons>
       </ion-col>
     </ion-row>

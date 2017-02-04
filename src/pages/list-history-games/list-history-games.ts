@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {StorageService} from "../../../www/assets/scripts/storageservice";
 import {Team} from "../../../www/assets/scripts/gametypes";
+import {ViewHistoryGameTabsPage} from "../view-history-game-tabs/view-history-game-tabs";
 
 /*
   Generated class for the HistoryGames page.
@@ -24,8 +25,8 @@ export class ListHistoryGamesPage {
 
   goToGame(game){
     this.storageService.setCurrentHistoryGame(game);
-   // this.navCtrl.pop();
-    //this.navCtrl.push(TabsPage);
+    this.navCtrl.pop();
+    this.navCtrl.push(ViewHistoryGameTabsPage);
   }
 
   deleteGame(game){
@@ -34,7 +35,7 @@ export class ListHistoryGamesPage {
 
 
   ionViewDidLoad() {
-    console.log('Hello HistoryGamesPage Page');
+
   }
 
 }

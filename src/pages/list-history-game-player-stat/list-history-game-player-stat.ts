@@ -6,14 +6,14 @@ import {ViewGamePlayerStatPage} from "../view-game-player-stat/view-game-player-
 
 @Component({
   selector: 'page-game-player-stat-list',
-  templateUrl: 'list-game-player-stat.html'
+  templateUrl: 'list-history-game-player-stat.html'
 })
-export class ListGamePlayerStatPage {
+export class ListHistoryGamePlayerStatPage {
 
-  currentGamePlayers;
+  currentHistoryGamePlayers;
 
   constructor(public navCtrl: NavController, storageService : StorageService) {
-    this.currentGamePlayers = storageService.getCurrentGame().players;
+    this.currentHistoryGamePlayers = null; //storageService.getCurrentHistoryGame();
   }
 
 

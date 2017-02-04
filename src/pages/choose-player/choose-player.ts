@@ -15,7 +15,6 @@ export class ChoosePlayersPage {
   team : Team;
   game : Game;
   players = new Array <Player>();
-  isTeamComplete : boolean;
   positions;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,public storageService : StorageService) {
@@ -41,17 +40,17 @@ export class ChoosePlayersPage {
         player.id = childSnapshot.key;
         this.players.push(player);
       });
-    });
 
-    this.storageService.loadCurrentGamePlayers(this.team.id, this.game.id, (snapshot)=>{
-      snapshot.forEach((childSnapshot) => {
-        let playerId = childSnapshot.val().player.id;
-        for( let i=this.players.length-1; i>=0; i--) {
-          if( this.players[i].id == playerId) this.players.splice(i,1);
-        }
+      this.storageService.loadCurrentGamePlayers(this.team.id, this.game.id, (snapshot)=>{
+        snapshot.forEach((childSnapshot) => {
+          let playerId = childSnapshot.val().player.id;
+          for( let i=this.players.length-1; i>=0; i--) {
+            if( this.players[i].id == playerId) this.players.splice(i,1);
+          }
+        });
       });
-    });
 
+    });
   }
 
   ngAfterViewInit() {

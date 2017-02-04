@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {FirebaseListObservable, AngularFire} from "angularfire2";
 import {Player} from "./playertypes";
 import {Game, GamePosition, Team} from "./gametypes";
-import {GamePlayer} from "../../../www/assets/scripts/gametypes";
 import {Util} from "./util";
+import {GamePlayer} from "../../../www/assets/scripts/gametypes";
 
 
 /**
@@ -27,7 +27,6 @@ export class StorageService {
   currentHistoryGame : Game;
 
   private currentGamePlayers : FirebaseListObservable<GamePlayer[]>;
-
 
   constructor(af: AngularFire) {
 
@@ -81,8 +80,9 @@ export class StorageService {
   }
 
   public loadCurrentGamePlayers(teamId, currentGameId, callbackFunc){
-    firebase.database().ref('/'+teamId+'/' + currentGameId + '/currentgameplayers').orderByChild('name').once('value', callbackFunc, this);
+    firebase.database().ref('/'+teamId+'/activegames/' + currentGameId + '/players').orderByChild('name').once('value', callbackFunc, this);
   }
+
 
   getPlayers(){
     return this.players;
@@ -134,27 +134,32 @@ export class StorageService {
     this.activeGames.remove(game.id);
   }
 
-  addHistoryGame(game){
+  addHistoryGame(game, callbackFunc){
     var copy = Util.cloneGame(game);
     copy.id = null;
     this.historyGames.push(copy).then(ref => {
       copy.id = ref.key;
-      this.historyGames.update(copy.id, copy);
+      this.historyGames.update(copy.id, copy).then(callbackFunc);
     });
   }
 
-  updateActiveGame(game){
+  updateActiveGame(game, callbackFunc){
     var copy = Util.cloneGame(game);
-    this.activeGames.update(copy.id, copy);
+    this.activeGames.update(copy.id, copy).then(callbackFunc);
   }
 
   public setCurrentGame(game){
     this.currentGame = game;
-    this.currentGamePlayers = this.af.database.list('/' + this.currentTeam.id + '/' + game.id + '/currentgameplayers', {
+    this.currentGamePlayers = this.af.database.list('/' + this.currentTeam.id + '/activegames/' + game.id + '/players', {
       query: {
         orderByChild: 'position/startTime'
       }
     });
+  }
+
+
+  getCurrentGamePlayers(){
+    return this.currentGamePlayers;
   }
 
   public setCurrentHistoryGame(game){
@@ -165,19 +170,20 @@ export class StorageService {
     return this.currentGame;
   }
 
-  getCurrentGamePlayers(){
-    return this.currentGamePlayers;
+  public getCurrentHistoryGame(){
+    return this.currentHistoryGame;
   }
 
-  addCurrentGamePlayer(gamePlayer, callbackFunc){
+
+  /*addCurrentGamePlayer(gamePlayer, callbackFunc){
     this.currentGamePlayers.push(gamePlayer).then(ref => {
       gamePlayer.id = ref.key;
       this.currentGamePlayers.update(gamePlayer.id, gamePlayer).then(callbackFunc);
     });
-  }
-  updateCurrentGamePlayer(gamePlayer){
+  }*/
+  updateCurrentGamePlayer(game, gamePlayer){
     var copy = Util.cloneGamePlayer(gamePlayer);
-    this.currentGamePlayers.update(copy.id, copy);
+    this.currentGamePlayers.update(game.id, copy);
   }
 
 

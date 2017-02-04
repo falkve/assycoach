@@ -28,12 +28,19 @@ export class Util{
       newGame.goalsOpponent = game.goalsOpponent;
       newGame.period = game.period;
 
-    if(game.historyPeriods != null){
-      for (let period of game.historyPeriods) {
-        let historyPeriod = Util.clonePeriod(period);
-        newGame.historyPeriods.push(historyPeriod);
+      if(game.periods != null){
+        for (let period of game.periods) {
+          let historyPeriod = Util.clonePeriod(period);
+          newGame.periods.push(historyPeriod);
       }
     }
+    if(game.players != null){
+      for (let gamePlayer of game.players) {
+        let historyPlayer = Util.cloneGamePlayer(gamePlayer);
+        newGame.players.push(historyPlayer);
+      }
+    }
+
     return newGame;
   }
 
@@ -64,12 +71,12 @@ export class Util{
     let newPlayer = Util.clonePlayer(gamePlayer.player);
     let newPosition = Util.cloneActiveGamePosition(gamePlayer.position);
     let newGamePlayer = new GamePlayer(newPlayer, newPosition);
-    newGamePlayer.id = gamePlayer.id;
+    //newGamePlayer.id = gamePlayer.id;
 
-    if(gamePlayer.historyPositions != null){
-      for (let position of gamePlayer.historyPositions) {
+    if(gamePlayer.positions != null){
+      for (let position of gamePlayer.positions) {
         let historyPosition = Util.cloneActiveGamePosition(position);
-        newGamePlayer.historyPositions.push(historyPosition);
+        newGamePlayer.positions.push(historyPosition);
       }
     }
 

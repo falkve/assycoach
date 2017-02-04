@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Util} from "../../../www/assets/scripts/util";
+import {ListGamePlayerStatPage} from "../list-game-player-stat/list-game-player-stat";
 
 
 @Component({
   selector: 'page-game-player-stat',
-  templateUrl: 'game-player-stat.html'
+  templateUrl: 'view-game-player-stat.html'
 })
-export class GamePlayerStatPage {
+export class ViewGamePlayerStatPage {
 
   gamePlayer;
   constructor(public navCtrl: NavController,  params: NavParams) {
     this.gamePlayer = params.get('player');
   }
 
-  ionViewDidLoad() {
-    console.log('Hello GamePlayerStatPage Page');
-  }
+
 
 
   calcTime(from, to){
@@ -26,6 +25,10 @@ export class GamePlayerStatPage {
   formatDate(dateLong){
     let d = new Date(dateLong);
     return d;
+  }
+
+  ionViewWillLeave() {
+    this.navCtrl.push(ListGamePlayerStatPage);
   }
 
 }

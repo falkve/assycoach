@@ -17,11 +17,10 @@ import 'rxjs/add/operator/map'
 })
 export class ChangeGamePositionPage {
 
-  gamePlayers;
+
   player;
   currentGame;
   constructor(public navCtrl: NavController, private ele: ElementRef, public storageService : StorageService, params: NavParams, public viewCtrl : ViewController) {
-    this.gamePlayers = storageService.getCurrentGamePlayers();
     this.player = params.get('player');
     this.currentGame = storageService.getCurrentGame();
   }
@@ -57,8 +56,18 @@ export class ChangeGamePositionPage {
     gamePlayer.position = this.player.position;
     this.player.position = position;
 
-    this.storageService.updateCurrentGamePlayer(gamePlayer);
-    this.storageService.updateCurrentGamePlayer(this.player);
+
+    //this.storageService.updateCurrentGamePlayer(this.currentGame, gamePlayer);
+    //this.storageService.updateCurrentGamePlayer(this.currentGame, this.player);
+
+    this.currentGame.players.update(gamePlayer);
+    this.currentGame.players.update(this.player);
+    this.storageService.updateActiveGame(this.currentGame,()=>{
+
+    });
+
+
+
 
     this.close();
   }

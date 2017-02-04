@@ -21,7 +21,6 @@ export class ChooseGamePositionPage {
   game : Game;
   player : Player;
 
-
   currentGamePlayers;
 
   nofPositionsSize = 0;
@@ -44,6 +43,7 @@ export class ChooseGamePositionPage {
     });
   }
 
+
   loadPositions(){
     let goalKeeper = false;
     this.storageService.loadPositions(this.team.id, (snapshot)=>{
@@ -53,7 +53,7 @@ export class ChooseGamePositionPage {
         let position = childSnapshot.val();
         for( let i=this.usedPositions.length-1; i>=0; i--) {
           if(this.usedPositions[i].id == 'GoalK'){
-            console.log('exists');
+
             goalKeeper = true;
           }
           if(position.id == this.usedPositions[i].id){
@@ -79,6 +79,7 @@ export class ChooseGamePositionPage {
 
 
 
+
   }
 
   ngAfterViewInit() {
@@ -90,10 +91,13 @@ export class ChooseGamePositionPage {
     let activeGamePosition = new ActiveGamePosition(position.name, position.shorty);
     activeGamePosition.id = position.id;
     let gamePlayer = new GamePlayer(this.player, activeGamePosition);
-    this.storageService.addCurrentGamePlayer(gamePlayer, () => {
+    if(this.game.players == null){
+      this.game.players = new Array<GamePlayer>();
+    }
+    this.game.players.push(gamePlayer);
+    this.storageService.updateActiveGame(this.game,()=>{
       this.close();
     });
-
   }
 
   close(){

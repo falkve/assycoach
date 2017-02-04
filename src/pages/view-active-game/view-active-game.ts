@@ -24,7 +24,23 @@ export class ViewActiveGamePage {
     this.game = storageService.getCurrentGame();
     this.team = storageService.getCurrentTeam();
     this.gamePlayers = storageService.getCurrentGamePlayers();
+    //this.sortPlayers();
+  }
 
+  sortPlayers(){
+    this.gamePlayers = this.game.players.sort((gamePlayer1,gamePlayer2)=>{
+
+
+      if (gamePlayer1.position.startTime > gamePlayer2.position.startTime) {
+        return 1;
+      }
+
+      if (gamePlayer1.position.startTime < gamePlayer2.position.startTime) {
+        return -1;
+      }
+
+      return 0;
+    });
   }
 
   changePosition(gamePlayer){
@@ -37,6 +53,11 @@ export class ViewActiveGamePage {
 
   showChangePosition(gamePlayer){
     let profileModal = this.modalCtrl.create(ChangeGamePositionPage, { player: gamePlayer });
+
+    profileModal.onDidDismiss(data => {
+      //this.sortPlayers();
+    });
+
     profileModal.present();
   }
 
@@ -48,7 +69,7 @@ export class ViewActiveGamePage {
         {
           text: 'No',
           handler: () => {
-            
+
           }
         },
         {

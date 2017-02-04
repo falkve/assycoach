@@ -11,13 +11,15 @@ export class Game{
   public goals : number = 0;
   public goalsOpponent : number = 0;
 
-  public period : Period;
+  public period : Period = null;
 
-  public historyPeriods : Array<Period>;
+  public periods : Array<Period>;
+  public players : Array<GamePlayer>;
 
   constructor(opponent: string) {
     this.opponent = opponent;
-    this.historyPeriods = new Array<Period>();
+    this.periods = new Array<Period>();
+    this.players = new Array<GamePlayer>();
   }
 }
 
@@ -61,19 +63,18 @@ export class Team{
 }
 
 export class GamePlayer{
-  public id : string;
   public name : string;
   public player : Player;
   public position : ActiveGamePosition;
 
-  public historyPositions : Array<ActiveGamePosition>;
+  public positions : Array<ActiveGamePosition>;
 
 
   constructor(player: Player, position: ActiveGamePosition) {
     this.player = player;
     this.position = position;
     this.name = player.name; //For sorting
-    this.historyPositions = new Array<ActiveGamePosition>();
+    this.positions = new Array<ActiveGamePosition>();
   }
 
 }

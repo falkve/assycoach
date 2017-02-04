@@ -19,11 +19,14 @@ import {ChoosePlayersPage} from "../pages/choose-player/choose-player";
 import {ViewActiveGamePage} from "../pages/view-active-game/view-active-game";
 import {ViewActiveGameStatPage} from "../pages/view-active-game-stat/view-active-game-stat";
 import {ChooseGamePositionPage} from "../pages/choose-game-position/choose-game-position";
-import {GamePlayerStatPage} from "../pages/game-player-stat/game-player-stat";
+import {ViewGamePlayerStatPage} from "../pages/view-game-player-stat/view-game-player-stat";
 import {ListGamePlayerStatPage} from "../pages/list-game-player-stat/list-game-player-stat";
 import {ChangeGamePositionPage} from "../pages/change-game-position/change-game-position";
 import {BasetabsPage} from "../pages/basetabs/basetabs";
 import {ListHistoryGamesPage} from "../pages/list-history-games/list-history-games";
+import {ViewHistoryGameTabsPage} from "../pages/view-history-game-tabs/view-history-game-tabs";
+import {ListHistoryGamePlayerStatPage} from "../pages/list-history-game-player-stat/list-history-game-player-stat";
+import {ViewHistoryGamePage} from "../pages/view-history-game/view-history-game";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAZXxk_yvqzmzvljKQTa7zFtCE5pRVZuKQ",
@@ -51,11 +54,14 @@ export const firebaseConfig = {
     ViewActiveGamePage,
     ViewActiveGameStatPage,
     ChooseGamePositionPage,
-    GamePlayerStatPage,
+    ViewGamePlayerStatPage,
     ListGamePlayerStatPage,
     ChangeGamePositionPage,
     BasetabsPage,
-    ListHistoryGamesPage
+    ListHistoryGamesPage,
+    ViewHistoryGameTabsPage,
+    ListHistoryGamePlayerStatPage,
+    ViewHistoryGamePage
   ],
   imports: [
     IonicModule.forRoot(CoachAssistantApp),
@@ -80,11 +86,14 @@ export const firebaseConfig = {
     ViewActiveGamePage,
     ViewActiveGameStatPage,
     ChooseGamePositionPage,
-    GamePlayerStatPage,
+    ViewGamePlayerStatPage,
     ListGamePlayerStatPage,
     ChangeGamePositionPage,
     BasetabsPage,
-    ListHistoryGamesPage
+    ListHistoryGamesPage,
+    ViewHistoryGameTabsPage,
+    ListHistoryGamePlayerStatPage,
+    ViewHistoryGamePage
   ],
   providers: [StorageService,{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
